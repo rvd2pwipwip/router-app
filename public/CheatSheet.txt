@@ -1,0 +1,56 @@
+1.after copying start files of router-app, npm i react-router-dom
+2.in index.js, import BrowserRouter:
+import { BrowserRouter } from "react-router-dom";
+4.wrap the <App/> component inside a <BrowserRouter/> (the BrowserRouter will pass the 
+browser history to <App/> and all its children components):
+ReactDOM.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById("root")
+);
+registerServiceWorker();
+5.in App.js, add a div with a class of content below the <NavBar/>:
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <NavBar />
+        <div className="content">
+        
+        </div>
+      </div>
+    );
+  }
+}
+
+export default App;
+6.import Route from react-router-dom:
+import React, { Component } from "react";
+import { Route } from "react-router-dom";
+7.register one or more route with two props (path and componenet) in the new div:
+<div className="content">
+  <Route path="/products" component={Products} />
+</div>
+8.duplicate the <Route/> three times and assign the posts, admin and home paths:
+<div className="content">
+  <Route path="/products" component={Products} />
+  <Route path="/posts" component={Posts} />
+  <Route path="/admin" component={Dashboard} />
+  <Route path="/" component={Home} />
+</div>
+9.add the exact props to the home <Route/> so the <Home/> is not rendered with all
+the routes that begin with /:
+<Route exact path="/" component={Home} />
+10.in App.js, import Switch from react-router-dom:
+import { Route, Switch } from "react-router-dom";
+11.wrap the routes in a <Switch/>
+Switch will render the first child that matches the location
+routes MUST be ordered from most specific to most generic:
+<Switch>
+  <Route path="/products" component={Products} />
+  <Route path="/posts" component={Posts} />
+  <Route path="/admin" component={Dashboard} />
+  <Route path="/" component={Home} />
+</Switch>
+
