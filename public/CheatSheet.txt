@@ -123,3 +123,7 @@ const Posts = ({ match }) => {
     </div>
   );
 };
+22.install the query-string npm module:
+npm i query-string@6.1.0
+23.import it in posts.jsx:
+import queryString from "query-string";
