@@ -127,3 +127,29 @@ const Posts = ({ match }) => {
 npm i query-string@6.1.0
 23.import it in posts.jsx:
 import queryString from "query-string";
+24.add the location object from the <Route/> props to the object destructuring of posts.jsx:
+const Posts = ({ match, location }) => {
+...
+25.parse the location .search with query-string:
+const Posts = ({ match, location }) => {
+  queryString.parse(location.search);
+26.grab the result in a const and console log to view the result:
+const Posts = ({ match, location }) => {
+  const result = queryString.parse(location.search);
+  console.log(result);
+27.navigate to an unexisting url:
+http://localhost:3000/xyz
+28.<Home/> rendered because its path "/" matched the "/xyz" path so add the exact prop to 
+the "/" route:
+<Route exact path="/" component={Home} />
+29.add the Redirect named import from the react-router-dom:
+import { Route, Switch, Redirect } from "react-router-dom";
+30.create a <Redirect/> with a to="/not-found" below the list of <Route/> components:
+<Redirect to="/not-found" />
+31.create the new not-found route to display the <NotFound/> component just above the home route:
+<NotFound path="/not-found" component={NotFound} />
+<Route exact path="/" component={Home} />
+<Redirect to="/not-found" />
+32.use another <Redirect/> to redirect the unexisting "/messages" route to the "/posts" route:
+<Redirect from="/messages" to="/posts" />
+
