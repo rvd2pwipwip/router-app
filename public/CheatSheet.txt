@@ -152,4 +152,85 @@ import { Route, Switch, Redirect } from "react-router-dom";
 <Redirect to="/not-found" />
 32.use another <Redirect/> to redirect the unexisting "/messages" route to the "/posts" route:
 <Redirect from="/messages" to="/posts" />
+33.to programmatically nabigate the user to the products component when the the user clicks
+on the save button of a product details, push the products url in the history:
+handleSave = () => {
+  this.props.history.push("/products");
+};
+34.replace the push with a replace to avoid going back to the (saved) product details 
+with the browser back button (often used with login pages):
+handleSave = () => {
+  this.props.history.push("/products");
+};
+35.to set up nested routing, open dashboard.jsx and import the link component from react-router-dom:
+import React from "react";
+import { Link } from "react-router-dom";
+36.add the <ul/> for links below the <h1/> by typing ul>(li>Link[to=''])*2:
+<h1>Admin Dashboard</h1>
+<ul>
+  <li>
+    <Link to=""></Link>
+  </li>
+  <li>
+    <Link to=""></Link>
+  </li>
+</ul>
+37.add the to='' paths and text nodes to the <link/> components:
+<li>
+  <Link to="/admin/posts">Posts</Link>
+</li>
+<li>
+  <Link to="/admin/users">Users</Link>
+</li>
+38.extract the <ul/> to put it in a new sidebar.jsx component inside the admin folder:
+import React from "react";
+import { Link } from "react-router-dom";
 
+const Sidebar = () => {
+  return (
+    <ul>
+      <li>
+        <Link to="/admin/posts">Posts</Link>
+      </li>
+      <li>
+        <Link to="/admin/users">Users</Link>
+      </li>
+    </ul>
+  );
+};
+
+export default Sidebar;
+39.import and render the new <Sidebar/> component in dashboard.jsx:
+import React from "react";
+import Sidebar from "./sidebar";
+
+const Dashboard = ({ match }) => {
+  return (
+    <div>
+      <h1>Admin Dashboard</h1>
+      <Sidebar />
+    </div>
+  );
+};
+
+export default Dashboard;
+40.import Route, Posts and Users then create the routes for users and posts 
+with the corresponding paths and components:
+import React from "react";
+import Sidebar from "./sidebar";
+import { Route } from "react-router-dom";
+import Posts from "./posts";
+import Users from "./users";
+
+const Dashboard = ({ match }) => {
+  return (
+    <div>
+      <h1>Admin Dashboard</h1>
+      <Sidebar />
+      <Route path="/admin/posts" component={Posts} />
+      <Route path="/admin/users" component={Users} />
+    </div>
+  );
+};
+
+export default Dashboard;
